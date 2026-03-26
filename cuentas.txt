@@ -1,0 +1,18 @@
+Cuenta|Nombre|Imputable
+0-00-00-00|Saldos Generales|No
+1-00-00-00|uno|No
+2-01-00-00|dos - uno|No
+3-00-00-00|tres cero cero|No
+1-01-01-00|uno - uno - uno - cero NO|No
+2-00-00-00|dos|No
+1-01-00-00|uno -uno|No
+1-01-01-01|uno final Imputable|Sí
+2-01-01-00|dos - uno - uno - cero|No
+2-01-01-01|Dos - uno - uno - uno Imputable|Sí
+1-01-01-02|uno -dos Imputable|Sí
+2-01-01-02|dos uno uno dos Imputable|Sí
+1-01-02-00|unoUnoDos|No
+1-01-02-01|UnoUnoDosUno|Sí
+1-01-02-02|UnoUnoDosDos|Sí
+0-01-00-00|Saldo Ejercicio anteriores|No
+0-02-00-00|Saldos Ejercicios Actuales|No

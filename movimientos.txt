@@ -1,0 +1,7 @@
+Cuenta|Nombre|Fecha|Importe|Tipo
+1-01-01-01|uno final Imputable|2026-03-10|33,77|I
+2-01-01-02|dos uno uno dos Imputable|2026-03-11|343.445,45|E
+1-01-01-02|uno -dos Imputable|2026-03-11|525,00|I
+2-01-01-01|Dos - uno - uno - uno Imputable|2026-03-12|5.421,00|E
+1-01-02-01|UnoUnoDosUno|2026-03-25|500,00|I
+1-01-02-01|UnoUnoDosUno|2026-03-25|600,00|I

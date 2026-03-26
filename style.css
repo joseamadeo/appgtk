@@ -1,0 +1,166 @@
+/*
+ * ======================================================
+ * ESTILOS BASE
+ * ======================================================
+ */
+
+window {
+    /* Color de fondo base, similar al original */
+    background-color: #f8f9fa; /* Color de fondo claro, similar a Bootstrap body */
+}
+
+/*
+ * ======================================================
+ * UTILIDADES DE TIPOGRAFÍA Y COLORES (TEXT UTILITIES)
+ * ======================================================
+ */
+
+/* Color de texto Principal (Primary - Azul) */
+.text-primary {
+    color: #007bff;
+}
+
+/* Color de texto Éxito (Success - Verde) */
+.text-success {
+    color: #28a745;
+}
+
+/* Color de texto Peligro (Danger - Rojo) */
+.text-danger {
+    color: #dc3545;
+}
+
+/*
+ * ======================================================
+ * UTILIDADES DE BOTONES (BUTTONS)
+ * Nota: GTK 4 ya maneja el hover y el estado automáticamente
+ * ======================================================
+ */
+
+/* Botón Principal (Primary Button) */
+button.btn-primary {
+    background-image: none; /* Elimina cualquier imagen de fondo predeterminada */
+    background-color: #007bff; /* Color azul para botón primario */
+    color: white; /* Texto blanco */
+    border-radius: 6px; /* Bordes redondeados */
+    margin-left: 5px; /* Margen izquierdo */
+    margin-right: 5px; /* Margen derecho */
+    margin-top: 5px; /* Margen superior */
+    margin-bottom: 5px; /* Margen inferior */
+    border: none; /* Sin borde */
+}
+
+button.btn-secondary {
+    background-image: none;
+    background-color: #6c757d; /* Color gris para botón secundario */
+    color: white;
+    border-radius: 6px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: none;
+}
+
+/* Botón de Éxito (Success Button) */
+button.btn-success {
+    background-image: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 6px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: none;
+}
+
+button.btn-danger {
+    background-image: none;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 6px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: none;
+}
+
+button.btn-warning {
+    background-image: none;
+    background-color: #ffc107;
+    color: black;
+    border-radius: 6px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: none;
+}
+
+button.btn-info {
+    background-image: none;
+    background-color: #17a2b8;
+    color: white;
+    border-radius: 6px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: none;
+}
+
+button.btn-light {
+    background-image: none;
+    background-color: #f8f9fa;
+    color: black;
+    border-radius: 6px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: none;
+}
+
+button.btn-dark {
+    background-image: none;
+    background-color: #343a40;
+    color: white;
+    border-radius: 6px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: none;
+}
+
+button.calendar-icon-button image {
+    color: #32069a;
+}
+
+/* Quitar el padding para que respete el tamaño pequeño */
+button.calendar-icon-button {
+    background-color: #bef12f;
+    background-image: none;
+    background-clip: padding-box;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    min-width: 24px;
+    min-height: 24px;
+    padding: 0;
+    margin: 0px;
+}
+
+
+entry.Valido {
+    background-color: #12b979;
+}
+
+entry.Invalido {
+    background-color: #d43444;
+}
+
+entry.Neutro {
+    background-color: #ffffff;
+}
