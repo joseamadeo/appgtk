@@ -1,4 +1,4 @@
-module appgtk
+module github.com/joseamadeo/appgtk
 
 go 1.25.0
 
