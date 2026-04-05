@@ -1,8 +1,8 @@
 package pantalla
 
 import (
-	"appgtk/entradas"
-	"appgtk/estructuras"
+	"github.com/joseamadeo/appgtk/entradas"
+	"github.com/joseamadeo/appgtk/estructuras"
 	"encoding/csv"
 	"fmt"
 	"os"

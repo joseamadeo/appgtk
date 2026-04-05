@@ -3,7 +3,7 @@ package entradas
 import (
 	"fmt"
 	"strconv"
-	"appgtk/estructuras"
+	"github.com/joseamadeo/appgtk/estructuras"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/core/glib"      // Para los objetos

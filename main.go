@@ -4,7 +4,7 @@ package main
 //  go build -o appgtk.exe -ldflags="-H=windowsgui" main.go
 
 import (
-	"appgtk/pantalla"
+	"github.com/joseamadeo/appgtk/pantalla"
 	_ "embed"
 	"fmt"
 	"os"

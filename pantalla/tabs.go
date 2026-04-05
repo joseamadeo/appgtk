@@ -1,7 +1,7 @@
 package pantalla
 
 import (
-	"appgtk/entradas"
+	"github.com/joseamadeo/appgtk/entradas"
 	"fmt"
 	"time"
 
