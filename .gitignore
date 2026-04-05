@@ -3,10 +3,9 @@
 __debug_bin
 
 # Dependencias
-<<<<<<< HEAD
+
 InstaladorAppGtk
-=======
 #lib/
 #share/
 InstaladorAppGtk
->>>>>>> 4d932f0 (Primer commit de mi proyecto GTK)
+
