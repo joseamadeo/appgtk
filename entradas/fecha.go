@@ -213,6 +213,26 @@ func (dp *Fecha) EstiloEntradaFecha() {
 	}
 }
 
+func (dp *Fecha) EsValido() bool{
+	text := dp.entry.Text()
+	if text == "" {
+		return false
+	}
+	f, err := time.Parse("02/01/2006", text)
+	if err == nil && len(text) == 10 {
+		// Aquí es donde se valida el rango que definiste
+		if f.Before(dp.Min) {
+			return false
+		} else if f.After(dp.Max) {
+			return  false
+		} else {
+			return true
+		}
+	} else {
+		return false
+	}
+}
+
 func (dp *Fecha) setupPasteFormatFecha() {
 	var handletID glib.SignalHandle
 	handletID = dp.entry.Connect("changed", func ()  {

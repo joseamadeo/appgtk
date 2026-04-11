@@ -30,6 +30,10 @@ func NewCuit() *Cuit {
 	return cuit
 }
 
+func (c *Cuit) EsValido() bool{
+	return  validateCuit(c.entry.Text())
+}
+
 func (c *Cuit) GetCuit() string {
 	return c.entry.Text()
 }

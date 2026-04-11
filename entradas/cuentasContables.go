@@ -64,6 +64,21 @@ func (cc *CuentaContable) SetCuenta(cuenta string) {
 	cc.EstiloEntrada()
 }
 
+func (cc *CuentaContable) EsValido() bool{
+	texto := cc.GetCuentaSinFormato()
+	
+	if len(texto) == 0 {
+		return false
+	}
+
+	// Validación básica: una cuenta completa debe tener 7 dígitos
+	if len(texto) == 7 {
+		return true
+	} else {
+		return false
+	}
+}
+
 func (cc *CuentaContable) setupFormatCuenta() {
 	var handleID glib.SignalHandle
 	handleID = cc.entry.Connect("changed", func() {
