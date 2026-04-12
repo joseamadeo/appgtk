@@ -157,12 +157,19 @@ func activate(app *gtk.Application) {
 		})
 		win.AddAction(accionPDF)
 
+		accionValidar := gio.NewSimpleAction("ValidarWidget", nil)
+		accionValidar.ConnectActivate(func(_ *glib.Variant) {
+			pantalla.ValidarWidget(win, app.ActiveWindow())
+		})
+		win.AddAction(accionValidar)
+
 		mnuEjemplos := gio.NewMenu()
 		mnuEjemplos.Append("Contador", "win.contador")
 		mnuEjemplos.Append("ListBox", "win.listBox")
 		mnuEjemplos.Append("EstiloCSS", "win.estiloCSS")
 		mnuEjemplos.Append("Tabs", "win.tabs")
 		mnuEjemplos.Append("PDF", "win.pdf")
+		mnuEjemplos.Append("Validar", "win.ValidarWidget")
 
 		accionCuentas := gio.NewSimpleAction("cuentas", nil)
 		accionCuentas.ConnectActivate(func(_ *glib.Variant) {

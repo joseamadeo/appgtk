@@ -31,7 +31,9 @@ func NewCuit() *Cuit {
 }
 
 func (c *Cuit) EsValido() bool{
-	return  validateCuit(c.entry.Text())
+	texto := c.GetCuitSinFormato()
+	fmt.Println("********ES VALIDO:", validateCuit(c.entry.Text()), "\n")
+	return  validateCuit(texto)
 }
 
 func (c *Cuit) GetCuit() string {
@@ -140,7 +142,9 @@ func validateCuit(cuit string) bool {
 		val := int(cuit[i] - '0')
 		suma += val * mult[i]
 	}
+//	fmt.Println("SUMA:", suma, "\n")
 	rev := 11 - (suma % 11)
+//	fmt.Println("rev 1:", rev, "\n")
 	if rev == 11 {
 		rev = 0
 	} else if rev == 10 {
@@ -148,7 +152,9 @@ func validateCuit(cuit string) bool {
 		// en la asignación del número de CUIT previo
 		rev = 9
 	}
+	fmt.Println("rev 2:", rev, "\n")
 	dv := int(cuit[10] - '0')
-
+	fmt.Println("dv=",dv,"\n")
+	fmt.Println("Validacion:",(dv == rev), "\n")
 	return dv == rev
 }
