@@ -238,8 +238,8 @@ func crearTab5() (contenido gtk.Widgetter, label gtk.Widgetter) {
 	contenidoWidget.SetColumnSpacing(6)
 	lblNumero := gtk.NewLabel("Ingrese un número (formato #.###,00)")
 	contenidoWidget.Attach(lblNumero, 0, 2, 2, 1)
-	numeroEntry := entradas.NewEntradaNumerica("#.###,00")
-	contenidoWidget.Attach(numeroEntry, 2, 2, 1, 1)
+	numeroEntry := entradas.NewNumerico("#.###,00")
+	contenidoWidget.Attach(numeroEntry.Object(), 2, 2, 1, 1)
 	lblResultado := gtk.NewLabel("Número ingresado: Ninguno")
 	btnObtenerNumero:= gtk.NewButtonWithLabel("Obtener número ingresado")
 	btnObtenerNumero.ConnectClicked(func() {

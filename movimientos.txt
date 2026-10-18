@@ -5,3 +5,5 @@ Cuenta|Nombre|Fecha|Importe|Tipo
 2-01-01-01|Dos - uno - uno - uno Imputable|2026-03-12|5.421,00|E
 1-01-02-01|UnoUnoDosUno|2026-03-25|500,00|I
 1-01-02-01|UnoUnoDosUno|2026-03-25|600,00|I
+1-01-01-01|uno final Imputable|||E
+1-01-01-01|uno final Imputable|||E

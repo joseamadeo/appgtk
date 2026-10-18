@@ -66,10 +66,10 @@ func MovimientoContable(w *gtk.ApplicationWindow) {
 	// columna 1 Importe
 	vboxImporte := gtk.NewBox(gtk.OrientationVertical, 5)
 	lblImporte := gtk.NewLabel("Importe:")
-	entryImporte := entradas.NewEntradaNumerica("#.###,00")
+	entryImporte := entradas.NewNumerico("#.###,00")
 	entryImporte.SetPlaceholderText("0,00")
 	vboxImporte.Append(lblImporte)
-	vboxImporte.Append(entryImporte)
+	vboxImporte.Append(entryImporte.Object())
 	formGrid.Attach(vboxImporte, 1, 0, 1, 1)
 
 	// Fila 2: Fecha | Tipo (ingreso/Egreso)
@@ -77,7 +77,7 @@ func MovimientoContable(w *gtk.ApplicationWindow) {
 	vboxFecha := gtk.NewBox(gtk.OrientationVertical, 5)
 	lblFecha := gtk.NewLabel("Fecha (dd/mm/yyyy):")
 	entryFecha := entradas.NewFecha()
-	entryFecha.Min, _ = time.Parse("02/01/2006", "01/01/2026") // Fecha mínima permitida
+	entryFecha.Min, _ = time.Parse("02/01/2006", "01/01/2020") // Fecha mínima permitida
 	entryFecha.Max = time.Now() // Fecha máxima permitida es hoy
 	vboxFecha.Append(lblFecha)
 	vboxFecha.Append(entryFecha)
@@ -156,7 +156,7 @@ func actualizarComboCuentas(dd *gtk.DropDown) {
 	dd.SetModel(model)
 }
 
-func manejarAgregar(tabla *entradas.MiTabla[movimiento], cmbCuenta *gtk.DropDown, entryFecha *entradas.Fecha, entryImporte *entradas.EntradaNumerica, swTipo *gtk.Switch) {
+func manejarAgregar(tabla *entradas.MiTabla[movimiento], cmbCuenta *gtk.DropDown, entryFecha *entradas.Fecha, entryImporte *entradas.Numerico, swTipo *gtk.Switch) {
  	idx := cmbCuenta.Selected()
   if idx == gtk.InvalidListPosition { 
     return // O manejar error si no hay nada seleccionado
@@ -167,6 +167,10 @@ func manejarAgregar(tabla *entradas.MiTabla[movimiento], cmbCuenta *gtk.DropDown
 		return
 	}
 
+	if !entryFecha.EsValido(){
+		fmt.Println("la fecha es invalida")
+		return
+	}
 	fechaStr, _ := entryFecha.GetFecha()
 	fechaDB, _ := entryFecha.GetFechaDB()
 	
@@ -258,7 +262,12 @@ func inicializarArchivoYTabla(tabla *entradas.MiTabla[movimiento]) {
 		if len(p) < 5 { continue }
 
 		// Convertir fecha del archivo a time.Time
-		fec, err := time.Parse("2006-01-02", p[2])
+		fechaSTr := strings.TrimSpace(p[2])
+		if fechaSTr == ""{
+			// ⚠️ Registro omitido: La fecha está vacía
+			continue
+		}
+		fec, err := time.Parse("2006-01-02", fechaSTr)
 		if err != nil {
 			fmt.Println("Error al parsear fecha:", err)
 			continue

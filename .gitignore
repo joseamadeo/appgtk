@@ -2,10 +2,12 @@
 *.exe
 __debug_bin
 
-# Dependencias
+# Archivos generados por la app (salen de reportes/diagramas)
+informe_movimientos.pdf
+
+# Dependencias (runtime GTK4 empaquetado para Windows)
+# Se trackean a propósito para poder compilar sin instalar GTK:
+# lib/
+# share/
 
 InstaladorAppGtk
-#lib/
-#share/
-InstaladorAppGtk
-

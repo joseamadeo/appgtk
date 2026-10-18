@@ -1,8 +1,25 @@
 package main
 
-//Para compilar y copiar la carpeta
-//  go build -o appgtk.exe -ldflags="-H=windowsgui" main.go
+/*
+#cgo pkg-config: glib-2.0
+#include <glib.h>
 
+// Manejador que descarta mensajes de advertencia de GTK
+void silence_gtk_assertions(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer user_data) {
+    // Si es un log de GTK y es un Warning/Critical, lo ignoramos
+    if (g_strcmp0(log_domain, "Gtk") == 0) {
+        return; 
+    }
+    // De lo contrario, imprimir en consola de forma normal
+    g_log_default_handler(log_domain, log_level, message, user_data);
+}
+
+void setup_old_logging() {
+    // Captura los niveles de error CRITICAL y WARNING para el dominio GTK
+    g_log_set_handler("Gtk", G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING, silence_gtk_assertions, NULL);
+}
+*/
+import "C"
 import (
 	"github.com/joseamadeo/appgtk/pantalla"
 	_ "embed"
@@ -19,7 +36,10 @@ import (
 //go:embed style.css
 var cssData string
 
+//Para compilar y copiar la carpeta
+//  go build -o appgtk.exe -ldflags="-H=windowsgui" main.go
 func main() {
+	C.setup_old_logging() // Configura el manejador de logs para silenciar advertencias de GTK
 	// 1. Configuración de entorno (Debe ir antes de NewApplication)
 	dir, _ := os.Getwd()
 	os.Setenv("XDG_DATA_DIRS", dir + "\\share")
