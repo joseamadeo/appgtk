@@ -1,10 +1,14 @@
 package pantalla
 
-import "github.com/diamondburned/gotk4/pkg/gtk/v4"
+import (
+	"github.com/joseamadeo/appgtk/estructuras"
+
+	"github.com/diamondburned/gotk4/pkg/gtk/v4"
+)
 
 func ShowLogin(app *gtk.Application, onSuccess func()) {
 	win := gtk.NewApplicationWindow(app)
-	win.SetTitle("Login")
+	win.SetTitle("Login - " + estructuras.NombreApp + " v" + estructuras.Version)
 	win.SetDefaultSize(300, 200)
 	box := gtk.NewBox(gtk.OrientationVertical, 10)
 	box.SetMarginTop(20)

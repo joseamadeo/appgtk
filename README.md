@@ -1,5 +1,7 @@
 # AppGtk 📒
 
+**Versión actual:** `v0.1.0`
+
 Aplicación de escritorio para **contabilidad** escrita en **Go** con interfaz gráfica **GTK 4**, que funciona con archivos de texto en disco (TXT) y genera reportes en **PDF**.
 
 Incluye además una colección de pantallas de ejemplo para explorar los widgets de GTK 4.
@@ -130,6 +132,25 @@ Cuenta|Nombre|Fecha|Importe|Tipo
 ## 📦 Instalador
 
 En `InstaladorAppGtk/` se encuentra el script de [Inno Setup](https://jrsoftware.org/isinfo.php) (`instalador.iss`) y el instalador compilado (`InsAppgtk.exe`).
+
+---
+
+## 🏷️ Versionado
+
+La versión debe mantenerse alineada en tres lugares:
+
+| Lugar | Archivo |
+|---|---|
+| Código Go | `estructuras/version.go` (`Version`) |
+| Instalador | `InstaladorAppGtk/instalador.iss` (`MyAppVersion`) |
+| Tag de Git | `v0.1.0` |
+
+Para publicar una nueva versión:
+
+```bash
+git tag -a v0.1.0 -m "AppGtk v0.1.0"
+git push origin main --tags
+```
 
 ---
 

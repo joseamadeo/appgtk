@@ -21,11 +21,13 @@ void setup_old_logging() {
 */
 import "C"
 import (
-	"github.com/joseamadeo/appgtk/pantalla"
 	_ "embed"
 	"fmt"
 	"os"
 	"strconv"
+
+	"github.com/joseamadeo/appgtk/estructuras"
+	"github.com/joseamadeo/appgtk/pantalla"
 
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
@@ -92,7 +94,7 @@ func activate(app *gtk.Application) {
 		// 1 - Crear la ventana principal
 		win := gtk.NewApplicationWindow(app)
 
-		win.SetTitle("Ejemplo de la librería GTK")
+		win.SetTitle(estructuras.NombreApp + " v" + estructuras.Version + " - Ejemplo de la librería GTK")
 		win.SetDefaultSize(800, 700)
 
 		// 2 - Acciones del menú
