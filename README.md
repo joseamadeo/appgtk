@@ -141,7 +141,7 @@ La versión debe mantenerse alineada en tres lugares:
 
 | Lugar | Archivo |
 |---|---|
-| Código Go | `estructuras/version.go` (`Version`) |
+| Código Go | `version.go` (`Version`) |
 | Instalador | `InstaladorAppGtk/instalador.iss` (`MyAppVersion`) |
 | Tag de Git | `v0.1.0` |
 

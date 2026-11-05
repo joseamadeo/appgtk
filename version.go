@@ -1,4 +1,4 @@
-package estructuras
+package main
 
 // NombreApp es el nombre visible de la aplicación.
 const NombreApp = "AppGtk"

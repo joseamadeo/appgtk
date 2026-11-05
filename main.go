@@ -26,7 +26,6 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/joseamadeo/appgtk/estructuras"
 	"github.com/joseamadeo/appgtk/pantalla"
 
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
@@ -90,11 +89,11 @@ func activate(app *gtk.Application) {
 	}
 
 	// Mostrar la ventana de login
-	pantalla.ShowLogin(app ,func() {
+	pantalla.ShowLogin(app, NombreApp+" v"+Version, func() {
 		// 1 - Crear la ventana principal
 		win := gtk.NewApplicationWindow(app)
 
-		win.SetTitle(estructuras.NombreApp + " v" + estructuras.Version + " - Ejemplo de la librería GTK")
+		win.SetTitle(NombreApp + " v" + Version + " - Ejemplo de la librería GTK")
 		win.SetDefaultSize(800, 700)
 
 		// 2 - Acciones del menú
