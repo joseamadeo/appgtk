@@ -34,14 +34,13 @@ func InformePDF(w *gtk.ApplicationWindow) {
 	cajaVert.SetMarginTop(20)
 
 	if err != nil {
-		fmt.Printf("Error al generar el PDF: %v\n", err)
+		MostrarError(&w.Window, "Error al generar el PDF: "+err.Error())
 		return
 	} else {
 		lbl := gtk.NewLabel(fmt.Sprintf("PDF generado exitosamente: %s", nombreArchivo))
 		btnAbrir := gtk.NewButtonWithLabel("Abrir PDF")
 		btnAbrir.ConnectClicked(func() {
 			// Aquí puedes agregar la lógica para abrir el PDF generado
-			fmt.Printf("Abriendo el PDF: %s\n", nombreArchivo)
 			abrirArchivo(nombreArchivo)
 		})
 
@@ -63,8 +62,6 @@ func InformePDF(w *gtk.ApplicationWindow) {
 			// Renderizar directamente usando la variable global actualizada
 			success := renderPDFPagina(filepath.Join(dir, nombreArchivo), actualPagina, cr)
 			cr.Restore() // Restaurar el estado original después de renderizar
-			fmt.Printf("Renderizando PDF: %s, Página: %d\n", filepath.Join(dir, nombreArchivo), actualPagina)
-			fmt.Printf("Renderizado exitoso: %v\n", success)
 			if !success {
 				// Mostrar un mensaje de error en el área de dibujo
 				cr.SetSourceRGB(1, 0, 0) // Rojo para el error

@@ -14,7 +14,7 @@ func Tabs(w *gtk.ApplicationWindow, ww *gtk.Window) {
 	page1, label1 := crearTab1()
 	notebook.AppendPage(page1, label1)
 	// --- Tab 2 ---
-	page2, label2 := crearTab2()
+	page2, label2 := crearTab2(&w.Window)
 	notebook.AppendPage(page2, label2)
 	// --- Tab 3 ---
 	page3, label3 := crearTab3()
@@ -64,7 +64,7 @@ func crearTab1() (contenido gtk.Widgetter, label gtk.Widgetter) {
 	return principalBox, labelWidget
 }
 
-func crearTab2() (contenido gtk.Widgetter, label gtk.Widgetter) {
+func crearTab2(ww *gtk.Window) (contenido gtk.Widgetter, label gtk.Widgetter) {
 	labelWidget := gtk.NewLabel("Grid - Tabla")
 	contenidoWidget := gtk.NewGrid()
 	// Establecer espaciado entre filas y columnas (opcional)
@@ -101,7 +101,7 @@ func crearTab2() (contenido gtk.Widgetter, label gtk.Widgetter) {
 	btnTab2ObtenerFecha.ConnectClicked(func() {
 		entrada, err := fechaEntry.GetFecha()
 		if err != nil {
-			fmt.Println("Error:", err)
+			MostrarError(ww, "Error al obtener la fecha: "+err.Error())
 			return
 		}
 		lblResultado.SetText(fmt.Sprintf("Fecha ingresada: %s", entrada))

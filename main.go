@@ -22,9 +22,7 @@ void setup_old_logging() {
 import "C"
 import (
 	_ "embed"
-	"fmt"
 	"os"
-	"strconv"
 
 	"github.com/joseamadeo/appgtk/pantalla"
 
@@ -54,7 +52,6 @@ func main() {
 	app.ConnectActivate(func() { activate(app) })
 
 	if code := app.Run(os.Args); code > 0 {
-		fmt.Println("Error al iniciar la aplicación:", strconv.Itoa(code))
 		os.Exit(code)
 	}
 }
@@ -82,10 +79,7 @@ func activate(app *gtk.Application) {
 
 		// Forzamos a GTK a buscar en tu carpeta local 'share/icons'
 		iconTheme := gtk.IconThemeGetForDisplay(display)
-		iconTheme.AddSearchPath("share\\icons") 
-		// fmt.Println("Rutas de iconos:", iconTheme.SearchPath()) // Agrega este print para depurar
-	}else{
-		fmt.Println("**** No se pudo obtener el display para configurar los iconos.")
+		iconTheme.AddSearchPath("share\\icons")
 	}
 
 	// Mostrar la ventana de login

@@ -4,7 +4,6 @@ import (
 	"github.com/joseamadeo/appgtk/entradas"
 	"github.com/joseamadeo/appgtk/estructuras"
 	"encoding/csv"
-	"fmt"
 	"os"
 
 	"github.com/diamondburned/gotk4/pkg/gtk/v4"
@@ -36,7 +35,7 @@ func Cuentas(w *gtk.ApplicationWindow) {
 
 	listaCuentas, err := cargarCuentas("cuentas.txt")
 	if err != nil {
-		fmt.Printf("Error %v. Iniciar tabla vacía\n", err)
+		MostrarError(&w.Window, "No se pudo cargar cuentas.txt: "+err.Error())
 		listaCuentas = []datosCuenta{} // Iniciar con lista vacía si hay error
 	}
 
@@ -108,7 +107,6 @@ func Cuentas(w *gtk.ApplicationWindow) {
 
 	// ... después de crear la tabla ...
 	tabla.AlSeleccionar(func(registro datosCuenta) {
-		fmt.Printf("Cuenta seleccionada: %+v\n", registro)
     // Cargamos los datos en los widgets del formulario
     entCuenta.SetCuenta(registro.Cuenta)
     entNombre.SetText(registro.Nombre)
@@ -124,7 +122,7 @@ func Cuentas(w *gtk.ApplicationWindow) {
 		nombre := entNombre.Text()
 		imputable := chkImputable.Active()
 		if cuenta == "" || nombre == "" {
-			fmt.Println("Cuenta y Nombre son obligatorios")
+			MostrarError(&w.Window, "Cuenta y Nombre son obligatorios.")
 			return
 		}
 		nuevaCuenta := datosCuenta{Cuenta: cuenta, Nombre: nombre, Imputable: imputable}
@@ -138,11 +136,9 @@ func Cuentas(w *gtk.ApplicationWindow) {
 			existe.Nombre = nombre
 			existe.Imputable = imputable
 			tabla.Modificar(existe)
-			fmt.Printf("Cuenta '%s' actualizada\n", cuenta)
 		} else {
 			// Agregar nueva cuenta
 			tabla.AgregarRegistro(nuevaCuenta)
-			fmt.Printf("Cuenta '%s' agregada\n", cuenta)
 		}
 		entCuenta.SetCuenta("")
 		entNombre.SetText("")
@@ -153,9 +149,7 @@ func Cuentas(w *gtk.ApplicationWindow) {
 	btnEliminar.ConnectClicked(func ()  {
 		err := tabla.EliminarSeleccionado()
 		if err != nil {
-			fmt.Printf("Error al eliminar: %v\n", err)
-		} else {
-			fmt.Printf("Cuenta eliminada\n")
+			MostrarError(&w.Window, "Error al eliminar: "+err.Error())
 		}
 	})
 
@@ -163,17 +157,16 @@ func Cuentas(w *gtk.ApplicationWindow) {
 		cuentas := tabla.Datos
 		archivo, err := os.Create("cuentas.txt")
 		if err != nil {
-			fmt.Printf("Error al crear archivo: %v\n", err)
+			MostrarError(&w.Window, "Error al crear cuentas.txt: "+err.Error())
 			return
 		}
 		defer archivo.Close()
-		fmt.Printf("Guardando %d cuentas en 'cuentas.txt'\n", len(cuentas))
 		escritura := csv.NewWriter(archivo)
 		escritura.Comma = '|'
 		// Escribir cabecera
 		err = escritura.Write([]string{"Cuenta", "Nombre", "Imputable"})
 		if err != nil {
-			fmt.Printf("Error al escribir cabecera: %v\n", err)
+			MostrarError(&w.Window, "Error al escribir la cabecera: "+err.Error())
 			return
 		}
 		// Escribir datos
@@ -184,14 +177,13 @@ func Cuentas(w *gtk.ApplicationWindow) {
 			}
 			err = escritura.Write([]string{cuenta.Cuenta, cuenta.Nombre, imputableStr})
 			if err != nil {
-				fmt.Printf("Error al escribir cuenta '%s': %v\n", cuenta.Cuenta, err)
+				MostrarError(&w.Window, "Error al escribir la cuenta '"+cuenta.Cuenta+"': "+err.Error())
+				return
 			}
 		}
 		escritura.Flush()
 		if err := escritura.Error(); err != nil {
-			fmt.Printf("Error al finalizar escritura: %v\n", err)
-		} else {
-			fmt.Println("Cuentas guardadas exitosamente en 'cuentas.txt'")
+			MostrarError(&w.Window, "Error al guardar cuentas.txt: "+err.Error())
 		}
 	})
 	

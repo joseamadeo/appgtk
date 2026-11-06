@@ -49,7 +49,7 @@ func MovimientoContable(w *gtk.ApplicationWindow) {
 	}
 	lista := []movimiento{} // Aquí cargarías tus movimientos desde un archivo o base de datos
 	tabla := entradas.NewTabla(lista, colsCuentas)
-	inicializarArchivoYTabla(tabla)
+	inicializarArchivoYTabla(w, tabla)
 	// --- 2. FORMULARIO ---
 	formGrid := gtk.NewGrid()
 	formGrid.SetColumnSpacing(20)
@@ -111,7 +111,7 @@ func MovimientoContable(w *gtk.ApplicationWindow) {
 	btnAgregar := gtk.NewButtonWithLabel("Agregar Registro")
 	btnAgregar.AddCSSClass("suggested-action")
 	btnAgregar.ConnectClicked(func ()  {
-		manejarAgregar(tabla, cmbCuenta, entryFecha, entryImporte, switchTipo)
+		manejarAgregar(w, tabla, cmbCuenta, entryFecha, entryImporte, switchTipo)
 	})
 	formGrid.Attach(btnAgregar, 0, 2, 2, 1)
 
@@ -156,19 +156,19 @@ func actualizarComboCuentas(dd *gtk.DropDown) {
 	dd.SetModel(model)
 }
 
-func manejarAgregar(tabla *entradas.MiTabla[movimiento], cmbCuenta *gtk.DropDown, entryFecha *entradas.Fecha, entryImporte *entradas.Numerico, swTipo *gtk.Switch) {
+func manejarAgregar(w *gtk.ApplicationWindow, tabla *entradas.MiTabla[movimiento], cmbCuenta *gtk.DropDown, entryFecha *entradas.Fecha, entryImporte *entradas.Numerico, swTipo *gtk.Switch) {
  	idx := cmbCuenta.Selected()
   if idx == gtk.InvalidListPosition { 
     return // O manejar error si no hay nada seleccionado
   }
 	info, existe := mapaCuentas[idx]
 	if !existe {
-		fmt.Println("Índice seleccionado no encontrado en mapaCuentas:", idx)
+		MostrarError(&w.Window, "No se encontró la cuenta seleccionada.")
 		return
 	}
 
 	if !entryFecha.EsValido(){
-		fmt.Println("la fecha es invalida")
+		MostrarError(&w.Window, "La fecha ingresada no es válida.")
 		return
 	}
 	fechaStr, _ := entryFecha.GetFecha()
@@ -233,7 +233,7 @@ func cargarMovimientosIniciales(tabla *entradas.MiTabla[movimiento]) {
 	}
 }
 
-func inicializarArchivoYTabla(tabla *entradas.MiTabla[movimiento]) {
+func inicializarArchivoYTabla(w *gtk.ApplicationWindow, tabla *entradas.MiTabla[movimiento]) {
 	nombreArchivo := "movimientos.txt"
 	cabecera := "Cuenta|Nombre|Fecha|Importe|Tipo\n"
 
@@ -269,7 +269,7 @@ func inicializarArchivoYTabla(tabla *entradas.MiTabla[movimiento]) {
 		}
 		fec, err := time.Parse("2006-01-02", fechaSTr)
 		if err != nil {
-			fmt.Println("Error al parsear fecha:", err)
+			MostrarError(&w.Window, "Error al interpretar la fecha '"+fechaSTr+"': "+err.Error())
 			continue
 		}
 
